@@ -1,6 +1,8 @@
 package tn.esprit.spring.kaddem.controllers;
 
 import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.kaddem.entities.Etudiant;
@@ -12,12 +14,17 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/etudiant")
 public class EtudiantRestController {
+	private static final Logger logger = LogManager.getLogger(EtudiantRestController.class);
+
+
 	@Autowired
 	IEtudiantService etudiantService;
 	// http://localhost:8089/Kaddem/etudiant/retrieve-all-etudiants
 	@GetMapping("/retrieve-all-etudiants")
 	public List<Etudiant> getEtudiants() {
+		logger.info("Début de la récupération de tous les étudiants");
 		List<Etudiant> listEtudiants = etudiantService.retrieveAllEtudiants();
+		logger.debug("Nombre d'étudiants récupérés : {}", listEtudiants.size());
 		return listEtudiants;
 	}
 	// http://localhost:8089/Kaddem/etudiant/retrieve-etudiant/8
