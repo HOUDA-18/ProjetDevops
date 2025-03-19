@@ -30,6 +30,12 @@ stage('Build Docker Images') {
                 sh 'docker-compose build'
             }
         }
+ stage('Push Docker Image') {
+            steps { 
+                sh 'docker-compose push' 
+                // Ou en direct : sh 'docker push houdachaanbi/houdachaanbi-4twin1-kaddem'
+            }
+        }
         // Étape 6 : Déploiement avec docker-compose
         stage('Deploy with Docker Compose') {
             steps {
