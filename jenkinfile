@@ -31,14 +31,14 @@ pipeline {
         }
 
         // Étape 5 : Construction des images Docker
-       /* stage('Build Docker Images') {
+        stage('Build Docker Images') {
             steps {
                 sh 'docker-compose build'
             }
         }
 
         // Étape 6 : Authentification à Docker Hub
-        stage('Login to Docker Hub') {
+        /* stage('Login to Docker Hub') {
             steps {
                 // Nettoyer les sessions Docker existantes
                 sh 'docker logout'
