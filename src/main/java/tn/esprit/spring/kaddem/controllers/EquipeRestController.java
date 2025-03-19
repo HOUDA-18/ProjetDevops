@@ -1,6 +1,8 @@
 package tn.esprit.spring.kaddem.controllers;
 
 import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
@@ -13,11 +15,20 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/equipe")
 public class EquipeRestController {
+
+	private static final Logger logger = LogManager.getLogger(EtudiantRestController.class);
+
+
 	IEquipeService equipeService;
-	// http://localhost:8089/Kaddem/equipe/retrieve-all-equipes
+	// http://localhost:8089/kaddem/equipe/retrieve-all-equipes
 	@GetMapping("/retrieve-all-equipes")
 	public List<Equipe> getEquipes() {
+		logger.info("Début de la récupération de tous les équipes");
+
 		List<Equipe> listEquipes = equipeService.retrieveAllEquipes();
+
+		logger.debug("Nombre d'équipes récupérés : {}", listEquipes.size());
+
 		return listEquipes;
 	}
 	// http://localhost:8089/Kaddem/equipe/retrieve-equipe/8
