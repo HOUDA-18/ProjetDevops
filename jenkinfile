@@ -10,9 +10,9 @@ pipeline {
         }
 
         // Étape 2 : Analyse SonarQube
-        /* stage('MVN Sonarqube') {
+         stage('MVN Sonarqube') {
             steps {
-                sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6 -Dmaven.test.skip=true'
+                sh 'mvn sonar:sonar -Dsonar.login=squ_2905618463fbe98c5cb143b9f67535672522e112 -Dmaven.test.skip=true'
             }
         }
 
@@ -24,7 +24,7 @@ pipeline {
         }
 
         // Étape 4 : Déploiement sur Nexus
-        stage('MVN Nexus') {
+        /* stage('MVN Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
             }
