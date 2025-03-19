@@ -1,11 +1,13 @@
 package tn.esprit.spring.kaddem.entities;
 
+import jakarta.persistence.*;
 import lombok.ToString;
+import org.springframework.data.jpa.repository.Temporal;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.*;
 
 @Entity
 @ToString
@@ -13,9 +15,8 @@ public class Contrat implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer idContrat;
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat
     private Date dateDebutContrat;
-    @Temporal(TemporalType.DATE)
     private Date dateFinContrat;
     @Enumerated(EnumType.STRING)
     private Specialite specialite;

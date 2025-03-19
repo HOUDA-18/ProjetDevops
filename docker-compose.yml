@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    image: houdachaanbi/houdachaanbi-4twin1-kaddem
+    container_name: houdachaanbi-4twin1-kaddem
+    build:
+      context: .
+      dockerfile: Dockerfile  # Optionnel si le fichier s'appelle "Dockerfile"
+    ports:
+      - "8089:8089"
+    environment:
+      # ===== Configuration Serveur =====
+      SERVER_PORT: 8089
+      SERVER_SERVLET_CONTEXT_PATH: /kaddem
+
+      # ===== Configuration H2 Obligatoire =====
+      SPRING_DATASOURCE_URL: jdbc:h2:mem:kaddem
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
+
+      # ===== Authentification H2 (Optionnel) =====
+      SPRING_DATASOURCE_USERNAME: houda
+      SPRING_DATASOURCE_PASSWORD: "123"
+
+      # ===== Console H2 =====
+      SPRING_H2_CONSOLE_ENABLED: "true"
+      SPRING_H2_CONSOLE_PATH: /h2-console
+      SPRING_H2_CONSOLE_SETTINGS_WEB_ALLOW_OTHERS: "true"  # Accès depuis l'extérieur
+
+      # ===== Configuration JPA/Hibernate =====
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update  # Auto-mise à jour du schéma
+      SPRING_JPA_SHOW_SQL: "true"            # Afficher les requêtes SQL (optionnel)
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"  # Formatage SQL (optionnel)

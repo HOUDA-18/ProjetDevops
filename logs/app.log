@@ -51,3 +51,64 @@
 04:50:40.453 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 1960 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
 04:50:40.458 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
 04:50:43.269 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 3.012 seconds (JVM running for 3.472)
+08:33:52.413 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 15896 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+08:33:52.425 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+08:35:46.580 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 23484 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+08:35:46.591 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+08:35:51.436 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 5.218 seconds (JVM running for 6.074)
+08:38:33.915 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 1188 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+08:38:33.925 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+08:38:38.513 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 4.932 seconds (JVM running for 5.721)
+09:36:41.256 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 21668 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+09:36:41.287 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+09:37:38.118 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 7232 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+09:37:38.148 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+09:38:17.226 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 14092 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+09:38:17.254 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+09:38:31.044 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 14.755 seconds (JVM running for 16.76)
+09:39:05.689 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 23460 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+09:39:05.721 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+09:39:18.134 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 13.377 seconds (JVM running for 15.442)
+11:54:30.361 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 33284 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+11:54:30.368 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:07:52.707 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 12744 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:07:52.713 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:07:55.656 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 3.162 seconds (JVM running for 3.684)
+12:08:46.840 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 26988 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:08:46.846 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:08:49.530 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 2.886 seconds (JVM running for 3.335)
+12:16:35.589 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 37168 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:16:35.597 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:17:37.655 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 16016 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:17:37.661 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:19:05.926 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 18476 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:19:05.933 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:20:29.448 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 17236 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:20:29.455 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:20:32.394 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 3.157 seconds (JVM running for 3.631)
+12:25:15.113 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 5184 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:25:15.119 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:25:17.909 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 3.005 seconds (JVM running for 3.479)
+12:27:12.751 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 25828 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:27:12.757 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:27:15.495 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 2.949 seconds (JVM running for 3.408)
+12:30:53.315 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 25880 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+12:30:53.321 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+12:30:55.974 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 2.856 seconds (JVM running for 3.299)
+13:39:07.648 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 with PID 37180 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+13:39:07.653 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+13:42:30.315 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 with PID 31500 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+13:42:30.320 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+13:42:33.808 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 3.72 seconds (process running for 4.378)
+13:52:14.261 [http-nio-8089-exec-1] INFO  tn.esprit.spring.kaddem.controllers.EtudiantRestController - Début de la récupération de tous les étudiants
+13:54:20.577 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 with PID 34860 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+13:54:20.585 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+13:54:26.120 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 5.908 seconds (process running for 6.927)
+13:54:27.571 [http-nio-8089-exec-1] INFO  tn.esprit.spring.kaddem.controllers.EtudiantRestController - Début de la récupération de tous les étudiants
+13:54:27.664 [http-nio-8089-exec-1] DEBUG tn.esprit.spring.kaddem.controllers.EtudiantRestController - Nombre d'étudiants récupérés : 0
+13:54:33.122 [http-nio-8089-exec-9] INFO  tn.esprit.spring.kaddem.controllers.EtudiantRestController - Début de la récupération de tous les étudiants
+13:54:33.125 [http-nio-8089-exec-9] DEBUG tn.esprit.spring.kaddem.controllers.EtudiantRestController - Nombre d'étudiants récupérés : 0
+13:54:43.687 [http-nio-8089-exec-5] INFO  tn.esprit.spring.kaddem.controllers.EtudiantRestController - Début de la récupération de tous les étudiants
+13:54:43.689 [http-nio-8089-exec-5] DEBUG tn.esprit.spring.kaddem.controllers.EtudiantRestController - Nombre d'étudiants récupérés : 0
+13:56:04.881 [http-nio-8089-exec-2] INFO  tn.esprit.spring.kaddem.controllers.EtudiantRestController - Début de la récupération de tous les étudiants
+13:56:04.895 [http-nio-8089-exec-2] DEBUG tn.esprit.spring.kaddem.controllers.EtudiantRestController - Nombre d'étudiants récupérés : 1
