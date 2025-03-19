@@ -17,11 +17,11 @@ pipeline {
         }*/
 
         // Étape 3 : Installation du projet
-       /* stage('Install') {
+        stage('Install') {
             steps {
                 sh 'mvn clean install -Dmaven.test.skip=true'
             }
-        }*/
+        }
 
         // Étape 4 : Déploiement sur Nexus
          stage('MVN Nexus') {
