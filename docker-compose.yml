@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   app:
-    image: houdachaanbi/houdachaanbi-4twin1-kaddem
-    container_name: houdachaanbi-4twin1-kaddem
+    image: wassef17/wassefammar-4twin1-kaddem
+    container_name: wassefammar-4twin1-kaddem
     build:
       context: .
       dockerfile: Dockerfile  # Optionnel si le fichier s'appelle "Dockerfile"
@@ -19,7 +19,7 @@ services:
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
 
       # ===== Authentification H2 (Optionnel) =====
-      SPRING_DATASOURCE_USERNAME: houda
+      SPRING_DATASOURCE_USERNAME: wassef
       SPRING_DATASOURCE_PASSWORD: "123"
 
       # ===== Console H2 =====
