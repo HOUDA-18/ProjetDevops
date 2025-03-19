@@ -1,8 +1,11 @@
 package tn.esprit.spring.kaddem.controllers;
 
 import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.kaddem.entities.Departement;
+import tn.esprit.spring.kaddem.entities.Etudiant;
 import tn.esprit.spring.kaddem.services.IDepartementService;
 
 import java.util.List;
@@ -11,11 +14,16 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/departement")
 public class DepartementRestController {
+	private static final Logger logger = LogManager.getLogger(DepartementRestController.class);
+
 	IDepartementService departementService;
 	// http://localhost:8089/Kaddem/departement/retrieve-all-departements
 	@GetMapping("/retrieve-all-departements")
 	public List<Departement> getDepartements() {
+		logger.info("Début de la récupération de tous les départements");
 		List<Departement> listDepartements = departementService.retrieveAllDepartements();
+		logger.debug("Nombre de déparetements récupérés : {}", listDepartements.size());
+
 		return listDepartements;
 	}
 	// http://localhost:8089/Kaddem/departement/retrieve-departement/8
