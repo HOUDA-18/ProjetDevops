@@ -8,13 +8,13 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
+ 
  stage('MVN Sonarqube') {
-/* stage('MVN Sonarqube') {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6 -Dmaven.test.skip=true'
             }
         }
-        }*/
+        
 stage('Install') {
             steps {
                 sh 'mvn clean install -Dmaven.test.skip=true'
