@@ -23,14 +23,14 @@ pipeline {
             }
         }
 
-       /* // Étape 4 : Déploiement sur Nexus
+        // Étape 4 : Déploiement sur Nexus
         stage('MVN Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
             }
         }
 
-        // Étape 5 : Construction des images Docker
+       /* // Étape 5 : Construction des images Docker
         stage('Build Docker Images') {
             steps {
                 sh 'docker-compose build'
