@@ -9,14 +9,14 @@ pipeline {
             }
         }
 
-       /* // Étape 2 : Analyse SonarQube
+        // Étape 2 : Analyse SonarQube
         stage('MVN Sonarqube') {
             steps {
-                sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6 -Dmaven.test.skip=true'
+                sh 'mvn sonar:sonar -Dsonar.loginsqu_781cffe4b16ce7ba05339b70c86fb2c465a7d260 -Dmaven.test.skip=true'
             }
         }
 
-        // Étape 3 : Installation du projet
+        /* // Étape 3 : Installation du projet
         stage('Install') {
             steps {
                 sh 'mvn clean install -Dmaven.test.skip=true'
