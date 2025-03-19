@@ -10,28 +10,28 @@ pipeline {
         }
 
         // Étape 2 : Analyse SonarQube
-         stage('MVN Sonarqube') {
+        /* stage('MVN Sonarqube') {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=squ_2905618463fbe98c5cb143b9f67535672522e112 -Dmaven.test.skip=true'
             }
-        }
+        }*/
 
         // Étape 3 : Installation du projet
-        stage('Install') {
+       /* stage('Install') {
             steps {
                 sh 'mvn clean install -Dmaven.test.skip=true'
             }
-        }
+        }*/
 
         // Étape 4 : Déploiement sur Nexus
-        /* stage('MVN Nexus') {
+         stage('MVN Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
             }
         }
 
         // Étape 5 : Construction des images Docker
-        stage('Build Docker Images') {
+       /* stage('Build Docker Images') {
             steps {
                 sh 'docker-compose build'
             }
