@@ -22,9 +22,7 @@ public class EtudiantRestController {
 	// http://localhost:8089/Kaddem/etudiant/retrieve-all-etudiants
 	@GetMapping("/retrieve-all-etudiants")
 	public List<Etudiant> getEtudiants() {
-		logger.info("Début de la récupération de tous les étudiants");
 		List<Etudiant> listEtudiants = etudiantService.retrieveAllEtudiants();
-		logger.debug("Nombre d'étudiants récupérés : {}", listEtudiants.size());
 		return listEtudiants;
 	}
 	// http://localhost:8089/Kaddem/etudiant/retrieve-etudiant/8
