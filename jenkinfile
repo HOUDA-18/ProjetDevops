@@ -61,14 +61,14 @@ pipeline {
         // Étape 7 : Pousser les images Docker vers Docker Hub
         stage('Push Docker Image') {
             steps {
-                sh 'docker-compose push'
+                sh 'docker compose push'
             }
         }
 
         // Étape 8 : Déploiement avec docker-compose
         stage('Deploy with Docker Compose') {
             steps {
-                sh 'docker-compose up -d'
+                sh 'docker compose up -d'
             }
         }
 
