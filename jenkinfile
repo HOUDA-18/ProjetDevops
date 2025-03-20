@@ -38,7 +38,7 @@ pipeline {
         }
 
         // Étape 6 : Authentification à Docker Hub
-        /* stage('Login to Docker Hub') {
+         stage('Login to Docker Hub') {
             steps {
                 // Nettoyer les sessions Docker existantes
                 sh 'docker logout'
@@ -83,6 +83,6 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
     }
 }
