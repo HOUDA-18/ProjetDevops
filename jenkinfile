@@ -30,7 +30,7 @@ pipeline {
             }
         }
 
-       /* // Étape 5 : Construction des images Docker
+        // Étape 5 : Construction des images Docker
         stage('Build Docker Images') {
             steps {
                 sh 'docker-compose build'
@@ -84,6 +84,6 @@ pipeline {
                 }
             }
         }
-*/
+
     }
 }
