@@ -79,7 +79,7 @@ pipeline {
                     // Réessayer jusqu'à 5 fois, avec une attente de 10 secondes entre chaque tentative
                     retry(5) {
                         sleep 10 // Attendre 10 secondes avant chaque tentative
-                        sh 'curl -I http://192.168.65.129:8089/kaddem'
+                        sh 'curl -I http://10.0.2.15:8089/kaddem'
                     }
                 }
             }
