@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.kaddem.entities.Contrat;
 import tn.esprit.spring.kaddem.services.ContratServiceImpl;
 import tn.esprit.spring.kaddem.services.IContratService;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.util.Date;
 import java.util.List;
 
@@ -16,11 +17,15 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/contrat")
 public class ContratRestController {
+	private static final Logger logger = LogManager.getLogger(ContratRestController.class);
+	@Autowired
 	IContratService contratService;
 	// http://localhost:8089/Kaddem/contrat/retrieve-all-contrats
 	@GetMapping("/retrieve-all-contrats")
 	public List<Contrat> getContrats() {
+		logger.info("In retrieveAllContrats : ");
 		List<Contrat> listContrats = contratService.retrieveAllContrats();
+		logger.debug("Nb Contrats récupérés : {}", listContrats.size());
 		return listContrats;
 	}
 	// http://localhost:8089/Kaddem/contrat/retrieve-contrat/8
