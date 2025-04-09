@@ -20,6 +20,7 @@ public class ContratRestController {
 	private static final Logger logger = LogManager.getLogger(ContratRestController.class);
 	@Autowired
 	IContratService contratService;
+	
 	// http://localhost:8089/Kaddem/contrat/retrieve-all-contrats
 	@GetMapping("/retrieve-all-contrats")
 	public List<Contrat> getContrats() {
