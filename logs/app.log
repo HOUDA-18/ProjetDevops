@@ -22,3 +22,7 @@
 02:55:53.681 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - No active profile set, falling back to 1 default profile: "default"
 02:55:55.443 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Started ContratRestControllerTest in 2.026 seconds (JVM running for 3.033)
 02:55:55.503 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestController - In retrieveAllContrats : 
+00:13:53.219 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Starting ContratRestControllerTest using Java 17.0.8.1 on LAPTOP-GRT8CSA4 with PID 22016 (started by ousse in C:\Users\ousse\Documents\Devops\ProjetDevops)
+00:13:53.230 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+00:13:55.791 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Started ContratRestControllerTest in 3.017 seconds (JVM running for 5.021)
+00:13:55.879 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestController - In retrieveAllContrats : 

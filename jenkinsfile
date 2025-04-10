@@ -11,6 +11,11 @@ pipeline {
             }
         }
 
+        stage('Tests Unitaires') {
+            steps {
+                sh 'mvn test' 
+            }
+        }
         stage('compile') {
             steps {
                 sh 'mvn clean compile'
@@ -18,8 +23,11 @@ pipeline {
         }
         stage('MVN SONARQUBE') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar'
+                 withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        mvn clean verify sonar:sonar \
+                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+                    '''
                 }
             }
         }
