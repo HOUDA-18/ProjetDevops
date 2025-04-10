@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    stages {
+        stage('GIT') {
+            steps {
+                git(
+                    branch: 'khemiriOussema_4twin1_G3', 
+                    url: 'https://github.com/HOUDA-18/ProjetDevops.git',
+                    credentialsId: 'github-creds' // Add this line
+                )
+            }
+        }
+
+        stage('compile') {
+            steps {
+                sh 'mvn clean compile'
+            }
+        }
+        stage('MVN SONARQUBE') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        stage('Deploy to Nexus') {
+            steps {
+                sh 'mvn deploy -Dmaven.test.skip=true'
+            }
+        }
+    }
+}
