@@ -6,7 +6,7 @@ pipeline {
                 git(
                     branch: 'khemiriOussema_4twin1_G3', 
                     url: 'https://github.com/HOUDA-18/ProjetDevops.git',
-                    credentialsId: 'github-creds' // Add this line
+                    credentialsId: 'github-creds'
                 )
             }
         }
@@ -16,11 +16,13 @@ pipeline {
                 sh 'mvn test' 
             }
         }
+        
         stage('compile') {
             steps {
                 sh 'mvn clean compile'
             }
         }
+        
         stage('MVN SONARQUBE') {
             steps {
                  withSonarQubeEnv('SonarQube') {
@@ -31,61 +33,56 @@ pipeline {
                 }
             }
         }
+        
         stage('Deploy to Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
             }
         }
-        //Construction des images Docker
+        
+        // Docker Build Stage
         stage('Build Docker Images') {
             steps {
-                sh 'sudo docker compose build'
+                sh 'docker compose build --no-cache'
             }
         }
-         // Étape 6 : Authentification à Docker Hub
+         
+        // Docker Hub Authentication
         stage('Login to Docker Hub') {
             steps {
-                // Nettoyer les sessions Docker existantes
-                sh 'sudo docker logout'
-
-                // Utiliser les credentials Docker Hub
                 withCredentials([usernamePassword(
-                    credentialsId: 'DOCKER_HUB_CREDENTIALS', // Doit correspondre à l'ID des credentials
-                    usernameVariable: 'DOCKER_USER',          // Variable pour le nom d'utilisateur
-                    passwordVariable: 'DOCKER_PASSWORD'       // Variable pour le token
+                    credentialsId: 'DOCKER_HUB_CREDENTIALS',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
-                    // Authentification Docker
                     sh '''
-                        echo "Tentative de connexion avec l'utilisateur: ${DOCKER_USER}"
+                        docker logout
                         echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin
                     '''
                 }
             }
         }
 
-        // Étape 7 : Pousser les images Docker vers Docker Hub
+        // Docker Push Stage
         stage('Push Docker Image') {
             steps {
-                sh 'sudo docker compose push'
+                sh 'docker compose push'
             }
         }
 
-        // Étape 8 : Déploiement avec docker-compose
+        // Deployment
         stage('Deploy with Docker Compose') {
             steps {
-                sh 'sudo docker compose up -d'
+                sh 'docker compose up -d'
             }
         }
-
-        // Étape 9 : Vérification du déploiement
+        
+        // Verification
         stage('Verify Deployment') {
             steps {
-                script {
-                    // Réessayer jusqu'à 5 fois, avec une attente de 10 secondes entre chaque tentative
-                    retry(5) {
-                        sleep 10 // Attendre 10 secondes avant chaque tentative
-                        sh 'curl -I http://192.168.163.128:8089/kaddem'
-                    }
+                retry(5) {
+                    sleep 10
+                    sh 'curl -I http://192.168.163.128:8089/kaddem'
                 }
             }
         }
