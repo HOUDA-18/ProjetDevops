@@ -39,14 +39,14 @@ pipeline {
         //Construction des images Docker
         stage('Build Docker Images') {
             steps {
-                sh 'sudo docker compose build'
+                sh 'sudo --non-interactive docker compose build'
             }
         }
          // Étape 6 : Authentification à Docker Hub
         stage('Login to Docker Hub') {
             steps {
                 // Nettoyer les sessions Docker existantes
-                sh 'sudo docker logout'
+                sh 'sudo --non-interactive docker logout'
 
                 // Utiliser les credentials Docker Hub
                 withCredentials([usernamePassword(
@@ -66,14 +66,14 @@ pipeline {
         // Étape 7 : Pousser les images Docker vers Docker Hub
         stage('Push Docker Image') {
             steps {
-                sh 'sudo docker compose push'
+                sh 'sudo --non-interactive docker compose push'
             }
         }
 
         // Étape 8 : Déploiement avec docker-compose
         stage('Deploy with Docker Compose') {
             steps {
-                sh 'sudo docker compose up -d'
+                sh 'sudo --non-interactive docker compose up -d'
             }
         }
 
