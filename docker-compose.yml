@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: oussemakhemiri2/oussemakhemiri-4twin1-kaddem
+    image: oussemakhemiri2/oussemakhemiri-4twin1-kaddem:latest
     container_name: oussemakhemiri-4twin1-kaddem
     build:
       context: .
