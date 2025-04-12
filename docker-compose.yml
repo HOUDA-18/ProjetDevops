@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  app:
+    image: oussemakhemiri2/oussemakhemiri-4twin1-kaddem
+    container_name: oussemakhemiri-4twin1-kaddem
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8089:8089"
+    environment:
+      # ===== Server Configuration =====
+      SERVER_PORT: 8089
+      SERVER_SERVLET_CONTEXT_PATH: /kaddem
+
+      # ===== MySQL Configuration =====
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/kaddem?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""
+
+      # ===== JPA/Hibernate Configuration =====
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5Dialect
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-kaddem
+    environment:
+      MYSQL_DATABASE: kaddem
+      MYSQL_ROOT_PASSWORD: ""
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+
+volumes:
+  mysql_data:

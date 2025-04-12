@@ -36,5 +36,54 @@ pipeline {
                 sh 'mvn deploy -Dmaven.test.skip=true'
             }
         }
+        //Construction des images Docker
+        stage('Build Docker Images') {
+            steps {
+                sh 'docker-compose build'
+            }
+        }
+         // Étape 6 : Authentification à Docker Hub
+        stage('Login to Docker Hub') {
+            steps {
+                // Nettoyer les sessions Docker existantes
+                sh 'docker logout'
+
+                // Utiliser les credentials Docker Hub
+                withCredentials([usernamePassword(
+                    credentialsId: 'DOCKER_HUB_CREDENTIALS', // Doit correspondre à l'ID des credentials
+                    usernameVariable: 'DOCKER_USER',          // Variable pour le nom d'utilisateur
+                    passwordVariable: 'DOCKER_PASSWORD'       // Variable pour le token
+                )]) {
+                    // Authentification Docker
+                    sh '''
+                        echo "Tentative de connexion avec l'utilisateur: ${DOCKER_USER}"
+                        echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin
+                    '''
+                }
+            }
+        }
+
+        // Étape 7 : Pousser les images Docker vers Docker Hub
+        stage('Push Docker Image') {
+            steps {
+                sh 'docker-compose push'
+            }
+        }
+
+        // Étape 8 : Déploiement avec docker-compose
+        stage('Deploy with Docker Compose') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
+
+        // Étape 9 : Vérification du déploiement
+        stage('Verify Deployment') {
+            steps {
+                script {
+                        sh 'curl -I http://192.168.163.128:8089/kaddem'
+                }
+            }
+        }
     }
 }
