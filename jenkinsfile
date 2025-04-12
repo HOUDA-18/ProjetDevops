@@ -45,35 +45,31 @@ pipeline {
          // Étape 6 : Authentification à Docker Hub
         stage('Login to Docker Hub') {
             steps {
-                // Nettoyer les sessions Docker existantes
-                sh 'sudo docker logout'
-
-                // Utiliser les credentials Docker Hub
                 withCredentials([usernamePassword(
-                    credentialsId: 'DOCKER_HUB_CREDENTIALS', // Doit correspondre à l'ID des credentials
-                    usernameVariable: 'DOCKER_USER',          // Variable pour le nom d'utilisateur
-                    passwordVariable: 'DOCKER_PASSWORD'       // Variable pour le token
+                    credentialsId: 'DOCKER_HUB_CREDENTIALS',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
-                    // Authentification Docker
                     sh '''
-                        echo "Tentative de connexion avec l'utilisateur: ${DOCKER_USER}"
-                        echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin
+                        sudo docker logout
+                        echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USER}" --password-stdin
                     '''
                 }
             }
         }
-
-        // Étape 7 : Pousser les images Docker vers Docker Hub
+        
         stage('Push Docker Image') {
             steps {
-                sh 'sudo docker compose push'
+                sh '''
+                    sudo docker compose push
+                    sudo docker logout
+                '''
             }
         }
-
-        // Étape 8 : Déploiement avec docker-compose
+        
         stage('Deploy with Docker Compose') {
             steps {
-                sh 'sudo docker compose up -d'
+                sh 'sudo docker compose down && sudo docker compose up -d'
             }
         }
 
