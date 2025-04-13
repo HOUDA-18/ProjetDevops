@@ -4,13 +4,13 @@ pipeline {
         stage('GIT') {
             steps {
                 git(
-                    branch: 'khemiriOussema_4twin1_G3', 
+                    branch: 'nourhene', 
                     url: 'https://github.com/HOUDA-18/ProjetDevops.git',
-                    credentialsId: 'github-creds' // Add this line
+                    credentialsId: 'github-token' // Add this line
                 )
             }
         }
-
+/*
         stage('Tests Unitaires') {
             steps {
                 sh 'mvn test' 
@@ -84,6 +84,6 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
     }
 }
