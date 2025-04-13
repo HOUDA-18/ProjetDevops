@@ -96,13 +96,8 @@
         </dependency>
     </dependencies>
     
-    <!-- Configuration de déploiement vers Nexus (Snapshots + Releases) -->
+    <!-- Configuration de déploiement vers Nexus -->
     <distributionManagement>
-        <repository>
-            <id>deploymentRepo</id>
-            <name>Nexus Repository</name>
-            <url>http://localhost:8081/repository/maven-releases/</url>
-        </repository>
         <snapshotRepository>
             <id>deploymentRepo</id>
             <name>Nexus Snapshots</name>
@@ -125,7 +120,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            
             <!-- Jacoco Plugin pour la couverture de test -->
             <plugin>
                 <groupId>org.jacoco</groupId>
