@@ -99,7 +99,7 @@ pipeline {
             }
         }
         // Étape 10 : Send Email
-        stage('Deploy with Docker Compose') 
+        stage('Email') 
         {
             post 
             {
