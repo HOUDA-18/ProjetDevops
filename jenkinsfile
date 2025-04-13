@@ -23,16 +23,14 @@ pipeline {
         }
       stage('MVNSONARQUBE') {
             steps {
-                 withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        mvn clean verify sonar:sonar \
-                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-                    '''
+                  
+                        mvn clean verify sonar:sonar 
+                       
                 }
         
         }
     
-}/*
+/*
         stage('Deploy to Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
