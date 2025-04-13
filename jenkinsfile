@@ -1,7 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('GIT') {
+        // Etape 1 : pull du code source depuis GitHub
+        stage('GIT') 
+        {
             steps {
                 git(
                     branch: 'khemiriOussema_4twin1_G3', 
@@ -10,18 +12,23 @@ pipeline {
                 )
             }
         }
-
-        stage('Tests Unitaires') {
+        // Etape 2 : test unitaire avec Maven
+        stage('Tests Unitaires') 
+        {
             steps {
                 sh 'mvn test' 
             }
         }
-        stage('compile') {
+        // Etape 3 : compilation du code source  
+        stage('compile') 
+        {
             steps {
                 sh 'mvn clean compile'
             }
         }
-        stage('MVN SONARQUBE') {
+        // Etape 4 : sonarQube
+        stage('MVN SONARQUBE') 
+        {
             steps {
                  withSonarQubeEnv('SonarQube') {
                     sh '''
@@ -31,18 +38,19 @@ pipeline {
                 }
             }
         }
+        // Etape 5 : déploiement sur Nexus
         stage('Deploy to Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
             }
         }
-        //Construction des images Docker
+        // Etape 6.1 : Construction des images Docker
         stage('Build Docker Images') {
             steps {
                 sh 'sudo docker compose build'
             }
         }
-         // Étape 6 : Authentification à Docker Hub
+         // Étape 6.2 : Authentification à Docker Hub
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(
@@ -57,7 +65,7 @@ pipeline {
                 }
             }
         }
-        
+        // Etape 7 : push image docker sur Docker Hub
         stage('Push Docker Image') {
             steps {
                 sh '''
@@ -66,13 +74,12 @@ pipeline {
                 '''
             }
         }
-        
+        // Étape 8 : Déploiement avec Docker Compose
         stage('Deploy with Docker Compose') {
             steps {
                 sh 'sudo docker compose down && sudo docker compose up -d'
             }
         }
-
         // Étape 9 : Vérification du déploiement
         stage('Verify Deployment') {
             steps {
@@ -84,6 +91,26 @@ pipeline {
                     }
                 }
             }
+        }
+        // Étape 10 : Send Email
+        post {
+        success {
+            emailext (
+                to: 'your-email@example.com',
+                subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' succeeded.</p>
+                         <p>Check console output at <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>""",
+                mimeType: 'text/html'
+            )
+        }
+        failure {
+            emailext (
+                to: 'your-email@example.com',
+                subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+                body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed.</p>
+                         <p>Check console output at <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>""",
+                mimeType: 'text/html'
+            )
         }
     }
 }
