@@ -33,8 +33,9 @@ services:
       SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
       MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "*"
       MANAGEMENT_ENDPOINTS_WEB_BASE_PATH: /actuator
-  networks:
+    networks:
       - monitoring-net
+
   prometheus:
     image: prom/prometheus
     container_name: kaddem-prometheus
