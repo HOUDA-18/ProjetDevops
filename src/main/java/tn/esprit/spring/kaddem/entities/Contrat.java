@@ -2,7 +2,7 @@ package tn.esprit.spring.kaddem.entities;
 
 import jakarta.persistence.*;
 import lombok.ToString;
-import org.springframework.data.jpa.repository.Temporal;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
