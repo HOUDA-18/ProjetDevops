@@ -1,16 +1,13 @@
 pipeline {
     agent any
-options {
-        timestamps()
-        ansiColor('xterm')
-    }
+
     stages {
         stage('GIT') {
             steps {
                 git(
                     branch: 'nourhene', 
                     url: 'https://github.com/HOUDA-18/ProjetDevops.git',
-                    credentialsId: 'github-token' // Add this line
+                    credentialsId: 'github-token'
                 )
             }
         }
@@ -20,15 +17,74 @@ options {
                 sh 'mvn clean compile'
             }
         }
-       stage('MVNSONARQUBE') {
-    steps {
-       withCredentials([string(credentialsId: 'sonar', variable: 'sonar')]) {
-sh '''
-                            mvn clean verify sonar:sonar \
-                            -Dsonar.token=$sonar \
-                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-                        '''            }
-    }
-}
 
+        stage('MVNSONARQUBE') {
+            steps {
+                sh 'mvn clean verify sonar:sonar'
+            }
+        }
+    }
+
+    // Les étapes suivantes sont désactivées pour l'instant :
+
+    /*
+    stage('Tests Unitaires') {
+        steps {
+            sh 'mvn test'
+        }
+    }
+
+    stage('Deploy to Nexus') {
+        steps {
+            sh 'mvn deploy -Dmaven.test.skip=true'
+        }
+    }
+
+    stage('Build Docker Images') {
+        steps {
+            sh 'sudo docker compose build'
+        }
+    }
+
+    stage('Login to Docker Hub') {
+        steps {
+            withCredentials([usernamePassword(
+                credentialsId: 'DOCKER_HUB_CREDENTIALS',
+                usernameVariable: 'DOCKER_USER',
+                passwordVariable: 'DOCKER_PASSWORD'
+            )]) {
+                sh '''
+                    sudo docker logout
+                    echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USER}" --password-stdin
+                '''
+            }
+        }
+    }
+
+    stage('Push Docker Image') {
+        steps {
+            sh '''
+                sudo docker compose push
+                sudo docker logout
+            '''
+        }
+    }
+
+    stage('Deploy with Docker Compose') {
+        steps {
+            sh 'sudo docker compose down && sudo docker compose up -d'
+        }
+    }
+
+    stage('Verify Deployment') {
+        steps {
+            script {
+                retry(5) {
+                    sleep 10
+                    sh 'curl -I http://192.168.163.128:8089/kaddem'
+                }
+            }
+        }
+    }
+    */
 }
