@@ -44,7 +44,7 @@ services:
       networks:
         - monitoring-net
 
-      grafana:
+  grafana:
         image: grafana/grafana:latest
         container_name: kaddem-grafana
         restart: unless-stopped
