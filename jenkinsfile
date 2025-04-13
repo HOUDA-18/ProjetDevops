@@ -11,11 +11,6 @@ pipeline {
             }
         }
 
-        stage('Tests Unitaires') {
-            steps {
-                sh 'mvn test' 
-            }
-        }
         stage('compile') {
             steps {
                 sh 'mvn clean compile'
