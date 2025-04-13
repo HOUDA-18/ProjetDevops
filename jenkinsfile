@@ -18,11 +18,14 @@ pipeline {
             }
         }
 
-        stage('MVNSONARQUBE') {
-            steps {
-                sh 'mvn clean verify sonar:sonar'
-            }
+       stage('MVNSONARQUBE') {
+    steps {
+        withCredentials([string(credentialsId: 'sonarn', variable: 'SONAR_TOKEN')]) {
+            sh 'mvn clean verify sonar:sonar -Dsonar.token=$SONAR_TOKEN'
         }
+    }
+}
+
     }
 
     // Les étapes suivantes sont désactivées pour l'instant :
