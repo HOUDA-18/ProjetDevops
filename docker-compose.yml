@@ -34,18 +34,19 @@ services:
       MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "*"
       MANAGEMENT_ENDPOINTS_WEB_BASE_PATH: /actuator
   prometheus:
-    image: prom/prometheus
-    container_name: kaddem-prometheus
-    restart: unless-stopped
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    depends_on:
-      - app
-      - node-exporter-vm
-    networks:
-      - monitoring-net
+  image: prom/prometheus
+  container_name: kaddem-prometheus
+  restart: unless-stopped
+  volumes:
+    - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  ports:
+    - "9090:9090"
+  depends_on:
+    - app
+    - node-exporter-vm
+  networks:
+    - monitoring-net
+
   node-exporter-vm:
     image: prom/node-exporter:latest
     container_name: node-exporter-vm
