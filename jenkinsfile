@@ -21,16 +21,18 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
-        stage('MVN SONARQUBE') {
-            steps {
-                 withSonarQubeEnv('SonarQube') {
-                    sh '''
-                        mvn clean verify sonar:sonar \
-                        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
-                    '''
-                }
-            }
-        }/*
+      stage('MVN Sonarqube') {
+    steps {
+        withSonarQubeEnv('sq1') {
+            withCredentials([string(credentialsId: 'jenkins', variable: 'jenkins')]) {
+sh '''
+                            mvn clean verify sonar:sonar \
+                            
+                            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+                        '''            }
+        }
+    }
+}/*
         stage('Deploy to Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
