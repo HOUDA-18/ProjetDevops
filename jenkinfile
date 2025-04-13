@@ -97,18 +97,20 @@ pipeline {
         }
 
       stage('Email Notification'){
-        post {
-        success {
-            mail to: 'wassef.ammar@esprit.tn',
-                 subject: "SUCCESS: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-                 body: "The job finished successfully. Check details: ${env.BUILD_URL}"
-        }
-        failure {
-            mail to: 'wassef.ammar@esprit.tn',
-                 subject: "FAILURE: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
-                 body: "The job has failed. Check details: ${env.BUILD_URL}"
-        }
-    }
-    }
-}
+            steps {
+                    post {
+                    success {
+                        mail to: 'wassef.ammar@esprit.tn',
+                             subject: "SUCCESS: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                             body: "The job finished successfully. Check details: ${env.BUILD_URL}"
+                    }
+                    failure {
+                        mail to: 'wassef.ammar@esprit.tn',
+                             subject: "FAILURE: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                             body: "The job has failed. Check details: ${env.BUILD_URL}"
+                    }
+                }
+                }
+                }
+            }
 }
