@@ -44,18 +44,18 @@ prometheus:
     networks:
       - monitoring-net
 
-  grafana:
-    image: grafana/grafana:latest
-    container_name: kaddem-grafana
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    environment:
-      GF_SECURITY_ADMIN_PASSWORD: 'admin'  # Choisis un mot de passe pour l'admin de Grafana
-    depends_on:
-      - prometheus
-    networks:
-      - monitoring-net
+    grafana:
+      image: grafana/grafana:latest
+      container_name: kaddem-grafana
+      restart: unless-stopped
+      ports:
+        - "3000:3000"
+      environment:
+        GF_SECURITY_ADMIN_PASSWORD: 'admin'  # Choisis un mot de passe pour l'admin de Grafana
+      depends_on:
+        - prometheus
+      networks:
+        - monitoring-net
 
 volumes:
   grafana-storage:
