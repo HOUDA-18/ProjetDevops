@@ -2,6 +2,23 @@ pipeline {
     agent any
 
     stages {
+        // ------------------------------------------------------------------
+        // NOUVELLE ÉTAPE AJOUTÉE (tests unitaires)
+        // ------------------------------------------------------------------
+        stage('Run Unit Tests') {
+            steps {
+                sh 'mvn test' 
+            }
+            post {
+                always {
+                    junit '**/target/surefire-reports/*.xml'
+                }
+            }
+        }
+
+        // ------------------------------------------------------------------
+        // ÉTAPES EXISTANTES (inchangées)
+        // ------------------------------------------------------------------
         // Étape 1 : Compilation du projet
         stage('Compile') {
             steps {
@@ -40,16 +57,12 @@ pipeline {
         // Étape 6 : Authentification à Docker Hub
         stage('Login to Docker Hub') {
             steps {
-                // Nettoyer les sessions Docker existantes
                 sh 'docker logout'
-
-                // Utiliser les credentials Docker Hub
                 withCredentials([usernamePassword(
-                    credentialsId: 'DOCKER_HUB_CREDENTIALS', // Doit correspondre à l'ID des credentials
-                    usernameVariable: 'DOCKER_USER',          // Variable pour le nom d'utilisateur
-                    passwordVariable: 'DOCKER_PASSWORD'       // Variable pour le token
+                    credentialsId: 'DOCKER_HUB_CREDENTIALS',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
-                    // Authentification Docker
                     sh '''
                         echo "Tentative de connexion avec l'utilisateur: ${DOCKER_USER}"
                         echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin
@@ -76,13 +89,24 @@ pipeline {
         stage('Verify Deployment') {
             steps {
                 script {
-                    // Réessayer jusqu'à 5 fois, avec une attente de 10 secondes entre chaque tentative
                     retry(5) {
-                        sleep 10 // Attendre 10 secondes avant chaque tentative
+                        sleep 10
                         sh 'curl -I http://192.168.65.129:8089/kaddem'
                     }
                 }
             }
+        }
+    }
+
+    // ------------------------------------------------------------------
+    // SECTION POST INCHANGÉE
+    // ------------------------------------------------------------------
+    post {
+        failure {
+            echo 'Pipeline failed!'
+        }
+        success {
+            echo 'Pipeline succeeded!'
         }
     }
 }
