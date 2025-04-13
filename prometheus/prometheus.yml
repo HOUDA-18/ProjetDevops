@@ -9,6 +9,6 @@ scrape_configs:
       - targets: ['host.docker.internal:8089']
     scrape_timeout: 10s
 
-  - job_name: 'node-exporter'
+  - job_name: 'node-exporter-vm'
     static_configs:
-      - targets: ['node-exporter:9100']
+      - targets: ['node-exporter-vm:9100']
