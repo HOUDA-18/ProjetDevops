@@ -9,6 +9,19 @@ pipeline {
             }
         }
 
+// ÉTAPE AJOUTÉE (début)
+        stage('Run Tests') {
+            steps {
+                sh 'mvn test' 
+            }
+            post {
+                always {
+                    junit '**/target/surefire-reports/*.xml'
+                }
+            }
+        }
+        // ÉTAPE AJOUTÉE (fin)
+
         // Étape 2 : Analyse SonarQube
         stage('MVN Sonarqube') {
             steps {
