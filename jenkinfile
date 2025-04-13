@@ -24,10 +24,10 @@ pipeline {
 
         // Étape 2 : Analyse SonarQube (EXISTANTE)
         stage('MVN Sonarqube') {
-            steps {
-                sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6 -Dmaven.test.skip=true'
-            }
-        }
+    steps {
+        sh 'mvn clean verify sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6'
+    }
+}
 
         // Étape 3 : Installation du projet (EXISTANTE)
         stage('Install') {
