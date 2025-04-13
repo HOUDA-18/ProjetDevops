@@ -56,12 +56,26 @@ public class EtudiantServiceImpl implements IEtudiantService{
         etudiantRepository.save(etudiant);
 	}
 	@Transactional
-	public Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Integer idContrat, Integer idEquipe){
-		Contrat c=contratRepository.findById(idContrat).orElse(null);
-		Equipe eq=equipeRepository.findById(idEquipe).orElse(null);
+	public Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Integer idContrat, Integer idEquipe) {
+		Contrat c = contratRepository.findById(idContrat).orElseThrow();
+		Equipe eq = equipeRepository.findById(idEquipe).orElseThrow();
+
+		// Initialisation si null
+		if(eq.getEtudiants() == null) {
+			eq.setEtudiants(new HashSet<>());
+		}
+
 		c.setEtudiant(e);
 		eq.getEtudiants().add(e);
-return e;
+
+		// Sauvegarde explicite de l'étudiant
+		Etudiant savedEtudiant = etudiantRepository.save(e);
+
+		// Sauvegarde des autres entités modifiées
+		contratRepository.save(c);
+		equipeRepository.save(eq);
+
+		return savedEtudiant;
 	}
 
 	public 	List<Etudiant> getEtudiantsByDepartement (Integer idDepartement){
