@@ -15,12 +15,12 @@ pipeline {
             steps {
                 sh 'mvn test' 
             }
-        }
+        }*/
         stage('compile') {
             steps {
                 sh 'mvn clean compile'
             }
-        }
+        }/*
         stage('MVN SONARQUBE') {
             steps {
                  withSonarQubeEnv('SonarQube') {
