@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh 'mvn clean compile'
             }
-        }/*
+        }
         stage('MVN SONARQUBE') {
             steps {
                  withSonarQubeEnv('SonarQube') {
@@ -30,7 +30,7 @@ pipeline {
                     '''
                 }
             }
-        }
+        }/*
         stage('Deploy to Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
