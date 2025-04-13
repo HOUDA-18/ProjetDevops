@@ -98,7 +98,9 @@ pipeline {
 
       stage('Email Notification'){
             steps {
-                    post {
+                echo "sending mail..."
+            }      
+            post {
                     success {
                         mail to: 'wassef.ammar@esprit.tn',
                              subject: "SUCCESS: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
@@ -109,7 +111,6 @@ pipeline {
                              subject: "FAILURE: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
                              body: "The job has failed. Check details: ${env.BUILD_URL}"
                     }
-                }
                 }
                 }
             }
