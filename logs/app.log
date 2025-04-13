@@ -1,0 +1,28 @@
+07:55:49.636 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 15908 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+07:55:49.648 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+07:55:54.337 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 5.037 seconds (JVM running for 5.763)
+20:25:13.741 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.8.1 on LAPTOP-GRT8CSA4 with PID 17160 (C:\Users\ousse\Documents\Devops\ProjetDevops\target\classes started by ousse in C:\Users\ousse\Documents\Devops\ProjetDevops)
+20:25:13.747 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+20:25:54.689 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.8.1 on LAPTOP-GRT8CSA4 with PID 6780 (C:\Users\ousse\Documents\Devops\ProjetDevops\target\classes started by ousse in C:\Users\ousse\Documents\Devops\ProjetDevops)
+20:25:54.695 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+20:25:58.094 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 3.703 seconds (JVM running for 4.567)
+00:34:52.437 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.8.1 on LAPTOP-GRT8CSA4 with PID 9100 (C:\Users\ousse\Documents\Devops\ProjetDevops\target\classes started by ousse in C:\Users\ousse\Documents\Devops\ProjetDevops)
+00:34:52.442 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+00:34:55.623 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 3.456 seconds (JVM running for 4.371)
+00:35:38.924 [http-nio-8089-exec-4] INFO  tn.esprit.spring.kaddem.controllers.ContratRestController - In retrieveAllContrats : 
+02:51:12.373 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Starting ContratRestControllerTest using Java 17.0.8.1 on LAPTOP-GRT8CSA4 with PID 13076 (started by ousse in C:\Users\ousse\Documents\Devops\ProjetDevops)
+02:51:12.380 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+02:51:14.244 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Started ContratRestControllerTest in 2.154 seconds (JVM running for 3.319)
+02:51:14.317 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestController - In retrieveAllContrats : 
+02:52:53.448 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Starting ContratRestControllerTest using Java 17.0.8.1 on LAPTOP-GRT8CSA4 with PID 1952 (started by ousse in C:\Users\ousse\Documents\Devops\ProjetDevops)
+02:52:53.455 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+02:52:55.192 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Started ContratRestControllerTest in 2.001 seconds (JVM running for 3.033)
+02:52:55.260 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestController - In retrieveAllContrats : 
+02:55:53.673 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Starting ContratRestControllerTest using Java 17.0.8.1 on LAPTOP-GRT8CSA4 with PID 15768 (started by ousse in C:\Users\ousse\Documents\Devops\ProjetDevops)
+02:55:53.681 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+02:55:55.443 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Started ContratRestControllerTest in 2.026 seconds (JVM running for 3.033)
+02:55:55.503 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestController - In retrieveAllContrats : 
+00:13:53.219 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Starting ContratRestControllerTest using Java 17.0.8.1 on LAPTOP-GRT8CSA4 with PID 22016 (started by ousse in C:\Users\ousse\Documents\Devops\ProjetDevops)
+00:13:53.230 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - No active profile set, falling back to 1 default profile: "default"
+00:13:55.791 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestControllerTest - Started ContratRestControllerTest in 3.017 seconds (JVM running for 5.021)
+00:13:55.879 [main] INFO  tn.esprit.spring.kaddem.controllers.ContratRestController - In retrieveAllContrats : 
