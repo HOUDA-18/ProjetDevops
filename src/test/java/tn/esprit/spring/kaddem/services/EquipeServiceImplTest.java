@@ -46,7 +46,7 @@ public class EquipeServiceImplTest {
     }
 
     @Test
-    public void testRetrieveAllEquipes() {
+     void testRetrieveAllEquipes() {
         List<Equipe> equipes = Arrays.asList(equipe1, equipe2);
         when(equipeRepository.findAll()).thenReturn(equipes);
 
@@ -56,7 +56,7 @@ public class EquipeServiceImplTest {
     }
 
     @Test
-    public void testAddEquipe() {
+     void testAddEquipe() {
         when(equipeRepository.save(equipe1)).thenReturn(equipe1);
 
         Equipe result = equipeService.addEquipe(equipe1);
@@ -66,7 +66,7 @@ public class EquipeServiceImplTest {
     }
 
     @Test
-    public void testUpdateEquipe() {
+     void testUpdateEquipe() {
         equipe1.setNomEquipe("Equipe 1 Modifiée");
         when(equipeRepository.save(equipe1)).thenReturn(equipe1);
 
@@ -76,7 +76,7 @@ public class EquipeServiceImplTest {
     }
 
     @Test
-    public void testRetrieveEquipe() {
+     void testRetrieveEquipe() {
         when(equipeRepository.findById(1)).thenReturn(Optional.of(equipe1));
 
         Equipe result = equipeService.retrieveEquipe(1);
@@ -86,7 +86,7 @@ public class EquipeServiceImplTest {
     }
 
     @Test
-    public void testDeleteEquipe() {
+     void testDeleteEquipe() {
         when(equipeRepository.findById(1)).thenReturn(Optional.of(equipe1));
 
         equipeService.deleteEquipe(1);
