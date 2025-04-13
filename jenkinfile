@@ -10,11 +10,11 @@ pipeline {
         }
 
         // Étape 2 : Analyse SonarQube
-        /* stage('MVN Sonarqube') {
+         stage('MVN Sonarqube') {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=squ_2905618463fbe98c5cb143b9f67535672522e112 -Dmaven.test.skip=true'
             }
-        }*/
+        }
 
         // Étape 3 : Installation du projet
         stage('Install') {
