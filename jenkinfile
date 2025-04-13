@@ -1,107 +1,114 @@
 pipeline {
     agent any
 
+    options {
+        timeout(time: 30, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+    }
+
     stages {
-        // ------------------------------------------------------------------
-        // ÉTAPE DE TESTS CORRIGÉE (avec gestion des dépendances)
-        // ------------------------------------------------------------------
+        // ==============================================================
+        # ÉTAPE DE TESTS CORRIGÉE
+        // ==============================================================
         stage('Run Unit Tests') {
             steps {
-                sh '''
-                    mvn clean test-compile surefire:test \
-                    -Dmaven.compiler.source=1.8 \
-                    -Dmaven.compiler.target=1.8 \
-                    -Dmaven.test.failure.ignore=false \
-                    -B -e
-                '''
+                sh 'mvn clean test'
             }
             post {
                 always {
-                    junit '**/target/surefire-reports/**/*.xml'
-                    archiveArtifacts '**/target/surefire-reports/**/*'
+                    junit '**/target/surefire-reports/*.xml'
+                    archiveArtifacts artifacts: '**/target/surefire-reports/**/*', allowEmptyArchive: true
                 }
             }
         }
 
-        // ------------------------------------------------------------------
-        // ÉTAPES EXISTANTES (inchangées)
-        // ------------------------------------------------------------------
+        // ==============================================================
+        # ÉTAPES DE BUILD/DEPLOIEMENT
+        // ==============================================================
         stage('Compile') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn compile'
             }
         }
 
-        stage('MVN Sonarqube') {
+        stage('SonarQube Analysis') {
             steps {
-                sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6 -Dmaven.test.skip=true'
+                sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6'
             }
         }
 
-        stage('Install') {
+        stage('Build & Package') {
             steps {
-                sh 'mvn clean install -Dmaven.test.skip=true'
+                sh 'mvn clean package -DskipTests'
             }
         }
 
-        stage('MVN Nexus') {
+        stage('Deploy to Nexus') {
             steps {
-                sh 'mvn deploy -Dmaven.test.skip=true'
+                sh 'mvn deploy -DskipTests'
             }
         }
 
+        // ==============================================================
+        # ÉTAPES DOCKER
+        // ==============================================================
         stage('Build Docker Images') {
             steps {
                 sh 'docker-compose build'
             }
         }
 
-        stage('Login to Docker Hub') {
+        stage('Authenticate Docker Hub') {
             steps {
-                sh 'docker logout'
                 withCredentials([usernamePassword(
                     credentialsId: 'DOCKER_HUB_CREDENTIALS',
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASSWORD'
                 )]) {
                     sh '''
-                        echo "Tentative de connexion avec l'utilisateur: ${DOCKER_USER}"
-                        echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin
+                        docker logout
+                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
                     '''
                 }
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Push Docker Images') {
             steps {
                 sh 'docker-compose push'
             }
         }
 
-        stage('Deploy with Docker Compose') {
+        // ==============================================================
+        # DÉPLOIEMENT
+        // ==============================================================
+        stage('Deploy Stack') {
             steps {
-                sh 'docker-compose up -d'
+                sh 'docker-compose down --remove-orphans'
+                sh 'docker-compose up -d --force-recreate'
             }
         }
 
-        stage('Verify Deployment') {
+        stage('Health Check') {
             steps {
-                script {
-                    retry(5) {
-                        sleep 10
-                        sh 'curl -I http://192.168.65.129:8089/kaddem'
-                    }
+                retry(5) {
+                    sleep 10
+                    sh 'curl -sSf http://192.168.65.129:8089/kaddem/actuator/health > /dev/null'
                 }
             }
         }
     }
 
     post {
-        failure {
-            echo 'Pipeline failed!'
+        always {
+            cleanWs()
         }
         success {
-            echo 'Pipeline succeeded!'
+            slackSend color: 'good', message: "Build ${env.BUILD_NUMBER} réussi ! ✅"
+        }
+        failure {
+            slackSend color: 'danger', message: "Build ${env.BUILD_NUMBER} échoué ! ❌"
+            archiveArtifacts artifacts: '**/target/logs/*.log', allowEmptyArchive: true
         }
     }
 }
