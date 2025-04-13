@@ -3,15 +3,22 @@ pipeline {
 
     stages {
         // ------------------------------------------------------------------
-        // NOUVELLE ÉTAPE AJOUTÉE (tests unitaires)
+        // ÉTAPE DE TESTS CORRIGÉE (avec gestion des dépendances)
         // ------------------------------------------------------------------
         stage('Run Unit Tests') {
             steps {
-                sh 'mvn test' 
+                sh '''
+                    mvn clean test-compile surefire:test \
+                    -Dmaven.compiler.source=1.8 \
+                    -Dmaven.compiler.target=1.8 \
+                    -Dmaven.test.failure.ignore=false \
+                    -B -e
+                '''
             }
             post {
                 always {
-                    junit '**/target/surefire-reports/*.xml'
+                    junit '**/target/surefire-reports/**/*.xml'
+                    archiveArtifacts '**/target/surefire-reports/**/*'
                 }
             }
         }
@@ -19,42 +26,36 @@ pipeline {
         // ------------------------------------------------------------------
         // ÉTAPES EXISTANTES (inchangées)
         // ------------------------------------------------------------------
-        // Étape 1 : Compilation du projet
         stage('Compile') {
             steps {
                 sh 'mvn clean compile'
             }
         }
 
-        // Étape 2 : Analyse SonarQube
         stage('MVN Sonarqube') {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6 -Dmaven.test.skip=true'
             }
         }
 
-        // Étape 3 : Installation du projet
         stage('Install') {
             steps {
                 sh 'mvn clean install -Dmaven.test.skip=true'
             }
         }
 
-        // Étape 4 : Déploiement sur Nexus
         stage('MVN Nexus') {
             steps {
                 sh 'mvn deploy -Dmaven.test.skip=true'
             }
         }
 
-        // Étape 5 : Construction des images Docker
         stage('Build Docker Images') {
             steps {
                 sh 'docker-compose build'
             }
         }
 
-        // Étape 6 : Authentification à Docker Hub
         stage('Login to Docker Hub') {
             steps {
                 sh 'docker logout'
@@ -71,21 +72,18 @@ pipeline {
             }
         }
 
-        // Étape 7 : Pousser les images Docker vers Docker Hub
         stage('Push Docker Image') {
             steps {
                 sh 'docker-compose push'
             }
         }
 
-        // Étape 8 : Déploiement avec docker-compose
         stage('Deploy with Docker Compose') {
             steps {
                 sh 'docker-compose up -d'
             }
         }
 
-        // Étape 9 : Vérification du déploiement
         stage('Verify Deployment') {
             steps {
                 script {
@@ -98,9 +96,6 @@ pipeline {
         }
     }
 
-    // ------------------------------------------------------------------
-    // SECTION POST INCHANGÉE
-    // ------------------------------------------------------------------
     post {
         failure {
             echo 'Pipeline failed!'
