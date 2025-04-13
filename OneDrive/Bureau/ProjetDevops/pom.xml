@@ -73,16 +73,18 @@
             <version>1.6.9</version>
         </dependency>
 
-        <!-- Résolution de javax.persistence et javax.transaction -->
+        <!-- javax.persistence (pas Jakarta) -->
         <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>2.2.3</version>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
         </dependency>
+
+        <!-- javax.transaction (pour @Transactional si nécessaire) -->
         <dependency>
-            <groupId>jakarta.transaction</groupId>
-            <artifactId>jakarta.transaction-api</artifactId>
-            <version>1.3.3</version>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <version>1.3</version>
         </dependency>
     </dependencies>
 
