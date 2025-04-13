@@ -9,15 +9,15 @@ services:
       dockerfile: Dockerfile  # Optionnel si le fichier s'appelle "Dockerfile"
     ports:
       - "8089:8089"
+    volumes:
+      - ./Kaddem/database:/opt/app/database
     environment:
       # ===== Configuration Serveur =====
       SERVER_PORT: 8089
       SERVER_SERVLET_CONTEXT_PATH: /kaddem
-     volumes:
-      - ./Kaddem/database:/opt/app/database  
 
       # ===== Configuration H2 Obligatoire =====
-      spring_datasource_url:jdbc:h2:file:/opt/app/database/kaddem;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/opt/app/database/kaddem;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=FALSE
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.h2.Driver
 
       # ===== Authentification H2 (Optionnel) =====
