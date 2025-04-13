@@ -31,3 +31,35 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update  # Auto-mise à jour du schéma
       SPRING_JPA_SHOW_SQL: "true"            # Afficher les requêtes SQL (optionnel)
       SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"  # Formatage SQL (optionnel)
+prometheus:
+    image: prom/prometheus
+    container_name: kaddem-prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - app
+    networks:
+      - monitoring-net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: kaddem-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: 'admin'  # Choisis un mot de passe pour l'admin de Grafana
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring-net
+
+volumes:
+  grafana-storage:
+
+networks:
+  monitoring-net:
+    driver: bridge
