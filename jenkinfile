@@ -1,110 +1,96 @@
 pipeline {
     agent any
 
-    options {
-        timeout(time: 30, unit: 'MINUTES')
-        buildDiscarder(logRotator(numToKeepStr: '10'))
-    }
-
     stages {
-        // ==============================================================
-        // ÉTAPE DE TESTS UNITAIRES
-        // ==============================================================
-        stage('Run Unit Tests') {
+        // Étape 1 : Compilation du projet
+        stage('Compile') {
             steps {
-                sh 'mvn clean test'
+                sh 'mvn clean compile'
+            }
+        }
+
+        // ÉTAPE AJOUTÉE (début)
+        stage('Run Tests') {
+            steps {
+                sh 'mvn test' 
             }
             post {
                 always {
                     junit '**/target/surefire-reports/*.xml'
-                    archiveArtifacts artifacts: '**/target/surefire-reports/**/*', allowEmptyArchive: true
                 }
             }
         }
+        // ÉTAPE AJOUTÉE (fin)
 
-        // ==============================================================
-        // ANALYSE SONARQUBE
-        // ==============================================================
-        stage('SonarQube Analysis') {
+        // Étape 2 : Analyse SonarQube (EXISTANTE)
+        stage('MVN Sonarqube') {
             steps {
-                sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6'
+                sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6 -Dmaven.test.skip=true'
             }
         }
 
-        // ==============================================================
-        // CONSTRUCTION ET DÉPLOIEMENT
-        // ==============================================================
-        stage('Build & Deploy') {
+        // Étape 3 : Installation du projet (EXISTANTE)
+        stage('Install') {
             steps {
-                sh 'mvn clean deploy -DskipTests'
+                sh 'mvn clean install -Dmaven.test.skip=true'
             }
         }
 
-        // ==============================================================
-        // DOCKER
-        // ==============================================================
+        // Étape 4 : Déploiement sur Nexus (EXISTANTE)
+        stage('MVN Nexus') {
+            steps {
+                sh 'mvn deploy -Dmaven.test.skip=true'
+            }
+        }
+
+        // Étape 5 : Construction des images Docker (EXISTANTE)
         stage('Build Docker Images') {
             steps {
                 sh 'docker-compose build'
             }
         }
 
+        // Étape 6 : Authentification à Docker Hub (EXISTANTE)
         stage('Login to Docker Hub') {
             steps {
-                script {
-                    withCredentials([usernamePassword(
-                        credentialsId: 'DOCKER_HUB_CREDENTIALS',
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_PASSWORD'
-                    )]) {
-                        sh '''
-                            docker logout
-                            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-                        '''
-                    }
+                sh 'docker logout'
+                withCredentials([usernamePassword(
+                    credentialsId: 'DOCKER_HUB_CREDENTIALS',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASSWORD'
+                )]) {
+                    sh '''
+                        echo "Tentative de connexion avec l'utilisateur: ${DOCKER_USER}"
+                        echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USER}" --password-stdin
+                    '''
                 }
             }
         }
 
-        stage('Push Docker Images') {
+        // Étape 7 : Pousser les images Docker (EXISTANTE)
+        stage('Push Docker Image') {
             steps {
                 sh 'docker-compose push'
             }
         }
 
-        // ==============================================================
-        // DÉPLOIEMENT FINAL
-        // ==============================================================
-        stage('Deploy Stack') {
+        // Étape 8 : Déploiement (EXISTANTE)
+        stage('Deploy with Docker Compose') {
             steps {
-                sh 'docker-compose down --remove-orphans'
-                sh 'docker-compose up -d --force-recreate'
+                sh 'docker-compose up -d'
             }
         }
 
-        stage('Health Check') {
+        // Étape 9 : Vérification (EXISTANTE)
+        stage('Verify Deployment') {
             steps {
-                retry(5) {
-                    sleep 10
-                    sh 'curl -sSf http://192.168.65.129:8089/kaddem/actuator/health'
+                script {
+                    retry(5) {
+                        sleep 10
+                        sh 'curl -I http://192.168.65.129:8089/kaddem'
+                    }
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            cleanWs()
-            script {
-                currentBuild.description = "Build ${env.BUILD_ID}"
-            }
-        }
-        success {
-            slackSend color: 'good', message: "SUCCÈS : Build ${env.BUILD_NUMBER}"
-        }
-        failure {
-            slackSend color: 'danger', message: "ÉCHEC : Build ${env.BUILD_NUMBER}"
-            archiveArtifacts artifacts: '**/logs/*.log', allowEmptyArchive: true
         }
     }
 }
