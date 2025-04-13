@@ -7,7 +7,7 @@ scrape_configs:
     metrics_path: '/kaddem/actuator/prometheus'
     static_configs:
       - targets: ['192.168.65.129:8089']
-    scrape_timeout: 20s
+    scrape_timeout: 10s
 
   - job_name: 'node-exporter-vm'
     static_configs:
