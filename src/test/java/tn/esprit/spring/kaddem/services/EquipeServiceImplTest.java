@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import tn.esprit.spring.kaddem.entities.Departement;
-import tn.esprit.spring.kaddem.repositories.DepartementRepository;
+import tn.esprit.spring.kaddem.entities.Equipe;
+import tn.esprit.spring.kaddem.repositories.EquipeRepository;
 
 import java.util.Arrays;
 import java.util.List;
