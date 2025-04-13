@@ -8,7 +8,7 @@ pipeline {
 
     stages {
         // ==============================================================
-        # ÉTAPE DE TESTS CORRIGÉE
+        // ÉTAPE DE TESTS UNITAIRES
         // ==============================================================
         stage('Run Unit Tests') {
             steps {
@@ -23,34 +23,25 @@ pipeline {
         }
 
         // ==============================================================
-        # ÉTAPES DE BUILD/DEPLOIEMENT
+        // ANALYSE SONARQUBE
         // ==============================================================
-        stage('Compile') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
-
         stage('SonarQube Analysis') {
             steps {
                 sh 'mvn sonar:sonar -Dsonar.login=squ_8999271d243ed486224fd95df9609e4105a86ac6'
             }
         }
 
-        stage('Build & Package') {
+        // ==============================================================
+        // CONSTRUCTION ET DÉPLOIEMENT
+        // ==============================================================
+        stage('Build & Deploy') {
             steps {
-                sh 'mvn clean package -DskipTests'
-            }
-        }
-
-        stage('Deploy to Nexus') {
-            steps {
-                sh 'mvn deploy -DskipTests'
+                sh 'mvn clean deploy -DskipTests'
             }
         }
 
         // ==============================================================
-        # ÉTAPES DOCKER
+        // DOCKER
         // ==============================================================
         stage('Build Docker Images') {
             steps {
@@ -58,17 +49,19 @@ pipeline {
             }
         }
 
-        stage('Authenticate Docker Hub') {
+        stage('Login to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'DOCKER_HUB_CREDENTIALS',
-                    usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASSWORD'
-                )]) {
-                    sh '''
-                        docker logout
-                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
-                    '''
+                script {
+                    withCredentials([usernamePassword(
+                        credentialsId: 'DOCKER_HUB_CREDENTIALS',
+                        usernameVariable: 'DOCKER_USER',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )]) {
+                        sh '''
+                            docker logout
+                            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+                        '''
+                    }
                 }
             }
         }
@@ -80,7 +73,7 @@ pipeline {
         }
 
         // ==============================================================
-        # DÉPLOIEMENT
+        // DÉPLOIEMENT FINAL
         // ==============================================================
         stage('Deploy Stack') {
             steps {
@@ -93,7 +86,7 @@ pipeline {
             steps {
                 retry(5) {
                     sleep 10
-                    sh 'curl -sSf http://192.168.65.129:8089/kaddem/actuator/health > /dev/null'
+                    sh 'curl -sSf http://192.168.65.129:8089/kaddem/actuator/health'
                 }
             }
         }
@@ -102,13 +95,16 @@ pipeline {
     post {
         always {
             cleanWs()
+            script {
+                currentBuild.description = "Build ${env.BUILD_ID}"
+            }
         }
         success {
-            slackSend color: 'good', message: "Build ${env.BUILD_NUMBER} réussi ! ✅"
+            slackSend color: 'good', message: "SUCCÈS : Build ${env.BUILD_NUMBER}"
         }
         failure {
-            slackSend color: 'danger', message: "Build ${env.BUILD_NUMBER} échoué ! ❌"
-            archiveArtifacts artifacts: '**/target/logs/*.log', allowEmptyArchive: true
+            slackSend color: 'danger', message: "ÉCHEC : Build ${env.BUILD_NUMBER}"
+            archiveArtifacts artifacts: '**/logs/*.log', allowEmptyArchive: true
         }
     }
 }
