@@ -1,0 +1,3 @@
+07:55:49.636 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Starting KaddemApplication using Java 17.0.11 on Houda with PID 15908 (C:\Users\chamb\Downloads\kaddem\kaddem\target\classes started by chamb in C:\Users\chamb\Downloads\kaddem\kaddem)
+07:55:49.648 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - No active profile set, falling back to 1 default profile: "default"
+07:55:54.337 [main] INFO  tn.esprit.spring.kaddem.KaddemApplication - Started KaddemApplication in 5.037 seconds (JVM running for 5.763)
