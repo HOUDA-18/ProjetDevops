@@ -1,24 +1,27 @@
 pipeline {
     agent any
-
     stages {
         stage('GIT') {
             steps {
                 git(
-                    branch: 'nourhene', 
+                    branch: 'khemiriOussema_4twin1_G3', 
                     url: 'https://github.com/HOUDA-18/ProjetDevops.git',
-                    credentialsId: 'github-token'
+                    credentialsId: 'github-creds' // Add this line
                 )
             }
         }
 
+        stage('Tests Unitaires') {
+            steps {
+                sh 'mvn test' 
+            }
+        }
         stage('compile') {
             steps {
                 sh 'mvn clean compile'
             }
         }
-
-      stage('MVNSONARQUBE') {
+       stage('MVNSONARQUBE') {
     steps {
        withCredentials([string(credentialsId: 'sonar', variable: 'sonar')]) {
 sh '''
