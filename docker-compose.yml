@@ -47,7 +47,7 @@ services:
     networks:
       - monitoring-net
   node-exporter-vm:
-    image: prom/node-exporter-vm
+    image: prom/node-exporter:latest
     container_name: node-exporter-vm
     restart: unless-stopped
     ports:
