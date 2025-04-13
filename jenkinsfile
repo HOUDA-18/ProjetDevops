@@ -98,7 +98,8 @@ pipeline {
                 }
             }
         }
-        // Étape 10 : Send Email
+   }
+    // Étape 10 : Send Email
         post 
         {
             success {
@@ -120,5 +121,4 @@ pipeline {
                 )
             }
        }
-   }
 }
