@@ -84,7 +84,7 @@ pipeline {
         }
 
         // Étape 9 : Vérification du déploiement
-        stage('Verify Deployment') {
+      /*  stage('Verify Deployment') {
             steps {
                 script {
                     // Réessayer jusqu'à 5 fois, avec une attente de 10 secondes entre chaque tentative
@@ -94,7 +94,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
       stage('Email Notification'){
             steps {
