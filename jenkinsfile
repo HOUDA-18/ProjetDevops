@@ -100,25 +100,42 @@ pipeline {
         }
    }
     // Étape 10 : Send Email
-        post 
-        {
-            success {
-                emailext (
-                    to: 'oussema2khemiri5@gmail.com',
-                    subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                    body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' succeeded.</p>
-                            <p>Check console output at <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>""",
-                    mimeType: 'text/html'
-                )
-            }
-            failure {
-                emailext (
-                    to: 'oussema2khemiri5@gmail.com',
-                    subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-                    body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' failed.</p>
-                            <p>Check console output at <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>""",
-                    mimeType: 'text/html'
-                )
-            }
-       }
+        post {
+        success {
+            mail to: 'oussema2khemiri5@gmail.com',
+                subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER} Completed",
+                body: """
+                Build Successfully Completed!
+
+                Job Name: ${env.JOB_NAME}
+                Build Number: #${env.BUILD_NUMBER}
+                Build Duration: ${currentBuild.durationString}
+                
+                Console Output: ${env.BUILD_URL}console
+                Build Details: ${env.BUILD_URL}
+                
+                All tests passed and artifacts were successfully deployed.
+                """
+        }
+        failure {
+            mail to: 'oussema2khemiri5@gmail.com',
+                subject: "URGENT: ${env.JOB_NAME} #${env.BUILD_NUMBER} Failed",
+                body: """
+                BUILD FAILURE ALERT!
+
+                Job Name: ${env.JOB_NAME}
+                Build Number: #${env.BUILD_NUMBER}
+                Build Duration: ${currentBuild.durationString}
+                
+                Error Location: ${env.BUILD_URL}console
+                Build Details: ${env.BUILD_URL}
+                
+                Immediate Action Required:
+                1. Review console output for errors
+                2. Check recent code changes
+                3. Verify dependency services
+                4. Re-run build after fixes
+                """
+        }
+        }
 }
