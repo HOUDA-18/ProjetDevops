@@ -31,20 +31,6 @@ Ce module fait partie du projet **Kaddem** et gère l'entité `Departement` ains
 
 ---
 
-## 🧬 Entité Principale : `Departement`
-
-```java
-public class Departement {
-    private String nomDepart;
-
-    @OneToMany(mappedBy="departement")
-    @JsonIgnore
-    private Set<Etudiant> etudiants;
-}
-
-
----
-
 ## 🔧 Lancement du Projet (Local / CI)
 
 ### ✅ Prérequis
@@ -58,7 +44,7 @@ public class Departement {
   - Git
   - SonarQube Scanner
  
-- 
+---
 ### 🏅 **Get all departement**
 **Endpoint**: `GET /departement/retrieve-all-departements`
 
